@@ -187,8 +187,58 @@ details[open] .faq-icon {
   animation: slowzoom 14s cubic-bezier(0.2, 0.6, 0.2, 1) forwards;
 }
 
+/* chat assistant mascot */
+@keyframes chat-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+@keyframes chat-blink {
+  0%, 93%, 100% { transform: scaleY(1); }
+  96% { transform: scaleY(0.1); }
+}
+@keyframes chat-wiggle {
+  0%, 100% { transform: rotate(0); }
+  15% { transform: rotate(-14deg); }
+  30% { transform: rotate(12deg); }
+  45% { transform: rotate(-8deg); }
+  60% { transform: rotate(5deg); }
+  75% { transform: rotate(-2deg); }
+}
+@keyframes chat-twinkle {
+  0%, 100% { transform: scale(1) rotate(0); opacity: 1; }
+  50% { transform: scale(0.6) rotate(45deg); opacity: 0.6; }
+}
+@keyframes chat-pop {
+  from { opacity: 0; transform: translateY(8px) scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+.chat-bob { animation: chat-bob 3.2s ease-in-out infinite; }
+.chat-wiggle { animation: chat-wiggle 1s ease-in-out 2; transform-origin: 50% 90%; }
+.chat-blink { animation: chat-blink 4.5s infinite; transform-box: fill-box; transform-origin: center; }
+.chat-twinkle { animation: chat-twinkle 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.chat-pop { animation: chat-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+/* Launcher + greeting sit above the phone Call/Book bar (MobileBar sets --chat-offset). */
+.chat-launcher,
+.chat-nudge {
+  --chat-base: max(var(--chat-offset, 0px), env(safe-area-inset-bottom));
+  transition-property: bottom, transform, opacity, visibility, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.chat-launcher { bottom: calc(var(--chat-base) + 1rem); }
+.chat-nudge { bottom: calc(var(--chat-base) + 5rem); }
+@media (min-width: 768px) {
+  .chat-launcher { bottom: 1.5rem; }
+  .chat-nudge { bottom: 6.25rem; }
+}
+.chat-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--sea) 14%, transparent) 1px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kenburns { animation: none; }
+  .chat-bob, .chat-wiggle, .chat-blink, .chat-twinkle, .chat-pop { animation: none; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   *, *::before, *::after {

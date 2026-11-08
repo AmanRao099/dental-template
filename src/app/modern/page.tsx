@@ -1,6 +1,7 @@
 import Header, { Logo } from "@/components/Header";
 import BookingForm from "@/components/BookingForm";
 import Frame from "@/components/Frame";
+import ChatBot from "@/components/ChatBot";
 import MobileBar from "@/components/MobileBar";
 import Reveal from "@/components/Reveal";
 import { clinic, faqs, gallery, images, steps, team, testimonials, treatments } from "@/lib/site";
@@ -347,6 +348,7 @@ export default function Modern() {
       </footer>
 
       <MobileBar />
+      <ChatBot />
     </>
   );
 }

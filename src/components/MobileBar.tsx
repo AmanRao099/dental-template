@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { clinic } from "@/lib/site";
 
 /**
@@ -9,6 +9,16 @@ import { clinic } from "@/lib/site";
  */
 export default function MobileBar() {
   const [show, setShow] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Tell floating widgets (chat launcher) how much room the bar takes, so they sit above it.
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty("--chat-offset", show ? `${ref.current?.offsetHeight ?? 0}px` : "0px");
+    return () => {
+      root.style.removeProperty("--chat-offset");
+    };
+  }, [show]);
 
   useEffect(() => {
     const targets = ["book", "site-footer"].map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
@@ -35,6 +45,7 @@ export default function MobileBar() {
 
   return (
     <div
+      ref={ref}
       inert={!show}
       className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/90 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-md transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
         show ? "translate-y-0" : "translate-y-full"

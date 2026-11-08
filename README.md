@@ -24,6 +24,7 @@ npm run build && npm start
 - **Photos** — `src/assets/images/` (static imports → automatic sizing, AVIF/WebP and blur-up placeholders). Replace files keeping the names. Credits/licence: `CREDITS.md`. Social preview: `src/app/opengraph-image.jpg`.
 - **Colours** — tokens in `src/app/globals.css` (`:root` for Studio, `[data-theme="modern"]`, `[data-theme="noir"]`).
 - **Fonts** — `src/app/layout.tsx` (Studio), `src/app/modern/layout.tsx`, `src/app/noir/layout.tsx`.
+- **Chat assistant** — guided Q&A bubble (bottom-right) on every design. Visitors pick preset questions; answers are built from `site.ts` (treatments, fees, hours, location, team, FAQs). Add or reorder topics in `src/lib/chatbot.ts`. No backend or AI service.
 - **Booking** — `src/components/BookingForm.tsx` opens WhatsApp with a pre-filled request. Replace `onSubmit` with a `fetch()` to your API/form service for email delivery.
 
 ## Shipping one design
